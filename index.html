@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrismOS — Metro Web OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="desktop">
+        <div id="workspace">
+            <div class="desktop-icons" id="desktopIcons"></div>
+        </div>
+        <div id="taskbar">
+            <div id="start-button"><i class="fas fa-window-maximize"></i> PrismOS</div>
+            <div class="taskbar-apps" id="taskbarApps"></div>
+            <div id="clock"><i class="far fa-clock"></i> 00:00</div>
+        </div>
+    </div>
+
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/clock.js"></script>
+    <script src="js/core/windowManager.js"></script>
+    <script src="js/core/taskbarManager.js"></script>
+    <script src="js/core/desktopManager.js"></script>
+    <script src="js/apps/explorer.js"></script>
+    <script src="js/apps/notepad.js"></script>
+    <script src="js/apps/settings.js"></script>
+    <script src="js/apps/about.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

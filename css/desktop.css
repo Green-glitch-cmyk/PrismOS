@@ -1,0 +1,72 @@
+#desktop {
+    background: #2d2d30;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+#workspace {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #2d2d30;
+    padding: 16px 20px;
+}
+
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+    align-content: flex-start;
+    height: 100%;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
+    padding: 10px 4px;
+    cursor: pointer;
+    transition: background 0.1s;
+    border: 2px solid transparent;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.desktop-icon .icon {
+    font-size: 40px;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    color: #e8e8e8;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.desktop-icon .label {
+    font-size: 13px;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    word-break: break-word;
+    max-width: 80px;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 8px;
+}
+
+.desktop-icon[data-app="explorer"] .icon { color: #f1c40f; }
+.desktop-icon[data-app="notepad"] .icon { color: #3498db; }
+.desktop-icon[data-app="settings"] .icon { color: #2ecc71; }
+.desktop-icon[data-app="about"] .icon { color: #e74c3c; }

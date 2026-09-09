@@ -1,0 +1,204 @@
+# ============================================================
+# PRISMOS — .gitignore
+# ============================================================
+
+# -------------------- Зависимости --------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# -------------------- Системные файлы --------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# -------------------- Редакторы и IDE --------------------
+# VS Code
+.vscode/
+*.code-workspace
+.vscode-test/
+
+# IntelliJ / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+*.un~
+
+# Atom
+.atom/
+.nuclide/
+
+# -------------------- Сборщики и инструменты --------------------
+# Webpack
+/dist/
+/build/
+/.cache/
+
+# Gulp
+tmp/
+.tmp/
+
+# Grunt
+.grunt/
+
+# Bower
+bower_components/
+
+# -------------------- Логи --------------------
+*.log
+logs/
+*.log.*
+.logs/
+
+# -------------------- Временные файлы --------------------
+*.tmp
+*.temp
+*.cache
+*.bak
+*.backup
+*.old
+*.orig
+
+# -------------------- Файлы окружения --------------------
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# -------------------- Документация --------------------
+# (оставляем только если не хотим хранить сгенерированную документацию)
+/docs/_build/
+/docs/output/
+/docs/api/
+
+# -------------------- Тесты и покрытие --------------------
+/coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+__tests__/
+__mocks__/
+
+# -------------------- Прочее --------------------
+# Пользовательские настройки
+*.user
+*.user.*
+*.local
+*.private
+
+# Сжатые архивы
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tgz
+
+# Образы дисков
+*.iso
+*.img
+
+# Медиа (если генерируются)
+*.mp4
+*.avi
+*.mov
+*.wmv
+
+# -------------------- Специфичные для PrismOS --------------------
+# Если используете сборку
+/prismos-build/
+/dist-prismos/
+
+# Конфиги с секретами
+/config/secrets.json
+/config/credentials.json
+
+# Кэш браузера (если сохраняется локально)
+.cache/
+.blob/
+
+# Файлы пользователей (если есть)
+/users/
+/data/
+/database/
+
+# -------------------- Базы данных --------------------
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# -------------------- Docker --------------------
+docker-compose.override.yml
+.dockerignore
+Dockerfile.dev
+*.dockerfile
+
+# -------------------- Python (если используется) --------------------
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.venv/
+venv/
+ENV/
+env/
+
+# -------------------- Java --------------------
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# -------------------- Ruby --------------------
+*.gem
+*.rbc
+/.bundle/
+/vendor/bundle/
+Gemfile.lock
+
+# -------------------- PHP --------------------
+composer.lock
+/vendor/
+
+# -------------------- Node.js --------------------
+# уже в начале
+
+# -------------------- macOS --------------------
+# уже в начале
+
+# -------------------- Linux --------------------
+*~
+.directory
+*.part
+
+# -------------------- Windows --------------------
+# уже в начале
