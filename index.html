@@ -4,14 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PrismOS — Metro Web OS</title>
+    <meta name="description" content="PrismOS — веб-ОС в стиле Metro UI">
+    <meta name="author" content="PrismOS Team">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Лицензия: MIT -->
+    <meta name="license" content="MIT License">
 </head>
 <body>
     <div id="desktop">
         <div id="workspace">
+            <!-- Иконки рабочего стола -->
             <div class="desktop-icons" id="desktopIcons"></div>
+
+            <div id="context-menu" class="context-menu hidden">
+                <div class="context-menu-item" data-action="create-folder">
+                    <i class="fas fa-folder-plus"></i> Создать папку
+                </div>
+                <div class="context-menu-divider"></div>
+                <div class="context-menu-item" data-action="settings">
+                    <i class="fas fa-sliders-h"></i> Настройки
+                </div>
+                <div class="context-menu-item" data-action="refresh">
+                    <i class="fas fa-sync"></i> Обновить
+                </div>
+            </div>
+            
+            <!-- Бета-текст в правом нижнем углу -->
+            <p id="beta-text">
+                PrismOS Classic<br>
+                Сборка cl-0910<br>
+                2026 MIT License<br>
+            </p>
         </div>
         <div id="taskbar">
             <div id="start-button"><i class="fas fa-window-maximize"></i> PrismOS</div>
@@ -22,6 +48,7 @@
 
     <script src="js/utils/helpers.js"></script>
     <script src="js/utils/clock.js"></script>
+    <script src="js/core/contextMenu.js"></script>
     <script src="js/core/windowManager.js"></script>
     <script src="js/core/taskbarManager.js"></script>
     <script src="js/core/desktopManager.js"></script>

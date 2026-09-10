@@ -1,3 +1,6 @@
+/* ============================================================
+   РАБОЧИЙ СТОЛ
+   ============================================================ */
 #desktop {
     background: #2d2d30;
     height: 100%;
@@ -11,10 +14,27 @@
     flex: 1;
     position: relative;
     overflow: hidden;
-    background: #2d2d30;
+    background-image: url('../wallpapers/img0.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 16px 20px;
 }
 
+/* Затемнение */
+#workspace::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Иконки рабочего стола */
 .desktop-icons {
     display: flex;
     flex-direction: column;
@@ -22,6 +42,8 @@
     gap: 20px 30px;
     align-content: flex-start;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .desktop-icon {
@@ -36,22 +58,22 @@
 }
 
 .desktop-icon:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .desktop-icon .icon {
     font-size: 40px;
     line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
     color: #e8e8e8;
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.05);
-    border: 2px solid rgba(255,255,255,0.1);
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .desktop-icon .label {
@@ -59,10 +81,10 @@
     font-weight: 300;
     text-align: center;
     margin-top: 8px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     word-break: break-word;
     max-width: 80px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.5);
     padding: 2px 8px;
 }
 
@@ -70,3 +92,122 @@
 .desktop-icon[data-app="notepad"] .icon { color: #3498db; }
 .desktop-icon[data-app="settings"] .icon { color: #2ecc71; }
 .desktop-icon[data-app="about"] .icon { color: #e74c3c; }
+
+/* ============================================================
+   БЕТА-ТЕКСТ
+   ============================================================ */
+#beta-text {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 300;
+    text-align: right;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   КОНТЕКСТНОЕ МЕНЮ
+   ============================================================ */
+.context-menu {
+    position: fixed;
+    min-width: 220px;
+    background: #2d2d30;
+    border: 2px solid #555;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding: 6px 0;
+    display: none;
+    animation: contextFadeIn 0.15s ease-out;
+}
+
+.context-menu.show {
+    display: block;
+}
+
+@keyframes contextFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.context-menu-item {
+    padding: 8px 20px;
+    color: #e8e8e8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background 0.1s;
+    border: 2px solid transparent;
+}
+
+.context-menu-item i {
+    width: 20px;
+    font-size: 16px;
+    color: #aaa;
+}
+
+.context-menu-item:hover {
+    background: #3d3d40;
+    border-color: #666;
+}
+
+.context-menu-item:active {
+    background: #4d4d50;
+}
+
+.context-menu-divider {
+    height: 2px;
+    background: #444;
+    margin: 4px 12px;
+}
+
+/* Стили для подменю (если понадобится) */
+.context-menu-item .shortcut {
+    margin-left: auto;
+    color: #888;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .context-menu {
+        min-width: 180px;
+        font-size: 13px;
+    }
+    .context-menu-item {
+        padding: 10px 16px;
+    }
+}
