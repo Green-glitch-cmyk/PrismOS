@@ -4,6 +4,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Version](https://img.shields.io/badge/version-Alpha%201-orange)
+[![Release](https://img.shields.io/badge/release-Alpha1.0-blue)](https://github.com/Green-glitch-cmyk/PrismOS/releases/tag/Alpha1.0)
 ![Status](https://img.shields.io/badge/status-active-success)
 
 ## О проекте
