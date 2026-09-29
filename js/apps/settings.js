@@ -54,6 +54,11 @@ const SettingsApp = {
     },
 
     init: function(winElement) {
+        const winDiv = winElement.closest('.window');
+        if (winDiv) {
+            winDiv.style.width = '860px';
+            winDiv.style.height = '560px';
+        }
         this.win = winElement;
         this.nav  = winElement.querySelector('#settings-nav-list');
         this.content = winElement.querySelector('#settings-content');
