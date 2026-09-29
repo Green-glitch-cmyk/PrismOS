@@ -4,25 +4,45 @@
     min-height: 200px;
     background: #f0f0f0;
     border: 2px solid #2b2b2b;
-    box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+    border-radius: 8px;
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.55),
+        0 2px 6px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.6) inset;
     display: flex;
     flex-direction: column;
     color: #1a1a1a;
     resize: both;
-    overflow: auto;
+    overflow: hidden;
     z-index: 10;
+    transform-style: preserve-3d;
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.window:hover {
+    transform: translateY(-2px) translateZ(0);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.6),
+        0 2px 8px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.6) inset;
 }
 
 .window-header {
-    background: #1a1a1a;
+    background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
     color: white;
     padding: 8px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: default;
+    cursor: grab;
     border-bottom: 2px solid #0a0a0a;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
     flex-shrink: 0;
+}
+
+.window-header:active {
+    cursor: grabbing;
 }
 
 .window-title {
@@ -62,6 +82,8 @@
     overflow: auto;
     border: 2px solid #bbb;
     border-top: none;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) inset;
 }
 
 .hidden {

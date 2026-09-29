@@ -8,6 +8,7 @@ const ContextMenu = {
 
     init: function() {
         this.menu = document.getElementById('context-menu');
+        if (!this.menu) return;
         this.bindEvents();
         this.bindActions();
     },
@@ -56,7 +57,7 @@ const ContextMenu = {
     bindActions: function() {
         // Обработка кликов по пунктам меню
         this.menu.querySelectorAll('.context-menu-item').forEach(item => {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', () => {
                 const action = item.dataset.action;
                 this.handleAction(action);
                 this.close();
@@ -68,29 +69,18 @@ const ContextMenu = {
         // Корректировка позиции, чтобы меню не выходило за экран
         const menuWidth = 220;
         const menuHeight = this.menu.offsetHeight || 150;
-        
+
         let left = x;
         let top = y;
-        
-        // Если меню не помещается справа
+
         if (x + menuWidth > window.innerWidth) {
             left = window.innerWidth - menuWidth - 10;
         }
-        
-        // Если меню не помещается снизу
         if (y + menuHeight > window.innerHeight) {
             top = window.innerHeight - menuHeight - 10;
         }
-        
-        // Если меню не помещается слева
-        if (left < 10) {
-            left = 10;
-        }
-        
-        // Если меню не помещается сверху
-        if (top < 10) {
-            top = 10;
-        }
+        if (left < 10) left = 10;
+        if (top < 10) top = 10;
 
         this.menu.style.left = left + 'px';
         this.menu.style.top = top + 'px';
@@ -104,7 +94,7 @@ const ContextMenu = {
     },
 
     handleAction: function(action) {
-        switch(action) {
+        switch (action) {
             case 'create-folder':
                 this.createFolder();
                 break;
@@ -120,12 +110,12 @@ const ContextMenu = {
     },
 
     createFolder: function() {
-        // Генерация имени папки
         const folderCount = document.querySelectorAll('.desktop-icon[data-app="folder"]').length + 1;
         const folderName = `Новая папка (${folderCount})`;
-        
-        // Создаём иконку папки
+
         const iconsContainer = document.getElementById('desktopIcons');
+        if (!iconsContainer) return;
+
         const folderIcon = document.createElement('div');
         folderIcon.className = 'desktop-icon';
         folderIcon.dataset.app = 'folder';
@@ -133,16 +123,13 @@ const ContextMenu = {
             <span class="icon"><i class="fas fa-folder" style="color:#f1c40f;"></i></span>
             <span class="label">${folderName}</span>
         `;
-        
-        // Двойной клик для открытия (имитация)
+
         folderIcon.addEventListener('dblclick', () => {
             alert(`📁 Открыта папка "${folderName}"`);
         });
-        
-        // Добавляем в конец
+
         iconsContainer.appendChild(folderIcon);
-        
-        // Уведомление
+
         this.showNotification('📁 Папка создана', folderName);
     },
 
@@ -155,11 +142,10 @@ const ContextMenu = {
     },
 
     refreshDesktop: function() {
-        // Анимация обновления
         const workspace = document.getElementById('workspace');
         workspace.style.transition = 'opacity 0.2s';
         workspace.style.opacity = '0.5';
-        
+
         setTimeout(() => {
             workspace.style.opacity = '1';
             this.showNotification('🔄 Рабочий стол обновлён', '');
@@ -167,7 +153,6 @@ const ContextMenu = {
     },
 
     showNotification: function(title, subtitle) {
-        // Простое уведомление
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;
@@ -178,7 +163,8 @@ const ContextMenu = {
             color: white;
             padding: 12px 24px;
             border: 2px solid #555;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            border-radius: 6px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
             z-index: 2000;
             font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
@@ -186,16 +172,17 @@ const ContextMenu = {
             animation: contextFadeIn 0.3s ease-out;
             max-width: 400px;
         `;
-        notification.innerHTML = `<div style="font-weight:600;">${title}</div>${subtitle ? `<div style="font-weight:300; font-size:12px; color:#aaa; margin-top:4px;">${subtitle}</div>` : ''}`;
-        
+        notification.innerHTML = `
+            <div style="font-weight:600;">${title}</div>
+            ${subtitle ? `<div style="font-weight:300; font-size:12px; color:#aaa; margin-top:4px;">${subtitle}</div>` : ''}
+        `;
+
         document.body.appendChild(notification);
-        
+
         setTimeout(() => {
             notification.style.opacity = '0';
             notification.style.transition = 'opacity 0.3s';
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
+            setTimeout(() => notification.remove(), 300);
         }, 2000);
     }
 };

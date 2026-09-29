@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrismOS — Metro Web OS</title>
-    <meta name="description" content="PrismOS — веб-ОС в стиле Metro UI">
+    <title>PrismOS alpha 1</title>
+    <meta name="description" content="PrismOS — Alpha 1">
     <meta name="author" content="PrismOS Team">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -34,13 +34,13 @@
             
             <!-- Бета-текст в правом нижнем углу -->
             <p id="beta-text">
-                PrismOS Classic<br>
-                Сборка cl-0910<br>
-                2026 MIT License<br>
+                PrismOS Alpha1<br>
+                Сборка a1-2809<br>
             </p>
         </div>
         <div id="taskbar">
-            <div id="start-button"><i class="fas fa-window-maximize"></i> PrismOS</div>
+            <div id="start-button" title="PrismOS"><i class="fas fa-window-maximize"></i></div>
+            <div class="dock-divider"></div>
             <div class="taskbar-apps" id="taskbarApps"></div>
             <div id="clock"><i class="far fa-clock"></i> 00:00</div>
         </div>
@@ -56,6 +56,8 @@
     <script src="js/apps/notepad.js"></script>
     <script src="js/apps/settings.js"></script>
     <script src="js/apps/about.js"></script>
+    <script src="js/apps/terminal.js"></script>
+    <script src="js/apps/calculator.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

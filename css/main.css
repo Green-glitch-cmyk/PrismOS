@@ -3,11 +3,17 @@
 @import url('taskbar.css');
 @import url('components.css');
 
+:root {
+    --shadow-soft: 0 2px 6px rgba(0,0,0,0.35);
+    --shadow-3d:   0 4px 10px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.06) inset;
+    --glow-accent: 0 0 12px rgba(241,196,15,0.35);
+    --ease: cubic-bezier(.2,.8,.2,1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border-radius: 0 !important;
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -16,6 +22,7 @@ body {
     height: 100vh;
     overflow: hidden;
     user-select: none;
+    perspective: 1200px;
 }
 
 ::-webkit-scrollbar {

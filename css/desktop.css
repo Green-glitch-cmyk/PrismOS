@@ -55,6 +55,7 @@
     cursor: pointer;
     transition: background 0.1s;
     border: 2px solid transparent;
+    border-radius: 6px;
 }
 
 .desktop-icon:hover {
@@ -65,15 +66,29 @@
 .desktop-icon .icon {
     font-size: 40px;
     line-height: 1;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
     color: #e8e8e8;
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));
+    box-shadow:
+        0 6px 14px rgba(0,0,0,0.5),
+        0 1px 0 rgba(255,255,255,0.15) inset;
+    transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+}
+
+.desktop-icon:hover .icon {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 12px 22px rgba(0,0,0,0.6),
+        0 1px 0 rgba(255,255,255,0.2) inset;
+}
+
+.desktop-icon:active .icon {
+    transform: translateY(0) scale(0.98);
 }
 
 .desktop-icon .label {
@@ -86,6 +101,7 @@
     max-width: 80px;
     background: rgba(0, 0, 0, 0.5);
     padding: 2px 8px;
+    border-radius: 3px;
 }
 
 .desktop-icon[data-app="explorer"] .icon { color: #f1c40f; }
@@ -109,6 +125,7 @@
     background: rgba(0, 0, 0, 0.3);
     padding: 10px 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     line-height: 1.6;
     letter-spacing: 0.3px;
     backdrop-filter: blur(4px);
@@ -135,12 +152,16 @@
 .context-menu {
     position: fixed;
     min-width: 220px;
-    background: #2d2d30;
+    background: linear-gradient(180deg, #2f2f33 0%, #252528 100%);
     border: 2px solid #555;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.6),
+        0 1px 0 rgba(255,255,255,0.07) inset;
     z-index: 1000;
     padding: 6px 0;
     display: none;
+    overflow: hidden;
     animation: contextFadeIn 0.15s ease-out;
 }
 
@@ -193,7 +214,6 @@
     margin: 4px 12px;
 }
 
-/* Стили для подменю (если понадобится) */
 .context-menu-item .shortcut {
     margin-left: auto;
     color: #888;
@@ -201,7 +221,6 @@
     font-weight: 300;
 }
 
-/* Адаптация для мобильных */
 @media (max-width: 768px) {
     .context-menu {
         min-width: 180px;

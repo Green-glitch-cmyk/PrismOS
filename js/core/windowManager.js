@@ -8,13 +8,22 @@ const WindowManager = {
         const winDiv = document.createElement('div');
         winDiv.className = 'window';
         winDiv.dataset.windowId = id;
-        
+
         const offset = (this.windows.length % 6) * 28;
         winDiv.style.left = (60 + offset) + 'px';
         winDiv.style.top = (40 + offset) + 'px';
         winDiv.style.width = '480px';
         winDiv.style.height = '320px';
         winDiv.style.zIndex = 10 + this.windows.length;
+
+        // Запоминаем исходные размеры для восстановления после maximize
+        winDiv._prevRect = {
+            w: '480px',
+            h: '320px',
+            l: winDiv.style.left,
+            t: winDiv.style.top,
+        };
+        winDiv.dataset.maximized = 'false';
 
         const header = document.createElement('div');
         header.className = 'window-header';
@@ -39,10 +48,10 @@ const WindowManager = {
         this._setupFocus(winDiv, id);
 
         this.workspace.appendChild(winDiv);
-        
+
         const winObj = { id, app: appId, title, element: winDiv, isActive: true };
         this.windows.push(winObj);
-        
+
         this.windows.forEach(w => {
             if (w.id !== id) w.isActive = false;
         });
@@ -50,26 +59,28 @@ const WindowManager = {
 
         TaskbarManager.update(this.windows);
         this._bringToFront(id);
-        
+
         return id;
     },
 
     close: function(id) {
         const idx = this.windows.findIndex(w => w.id === id);
         if (idx === -1) return;
-        
+
         const win = this.windows[idx];
         win.element.remove();
         this.windows.splice(idx, 1);
-        
+
         if (this.activeWindowId === id) {
-            this.activeWindowId = this.windows.length > 0 ? this.windows[this.windows.length-1].id : null;
+            this.activeWindowId = this.windows.length > 0
+                ? this.windows[this.windows.length - 1].id
+                : null;
             if (this.activeWindowId) {
                 const activeWin = this.windows.find(w => w.id === this.activeWindowId);
                 if (activeWin) activeWin.isActive = true;
             }
         }
-        
+
         TaskbarManager.update(this.windows);
         this.windows.forEach((w, i) => {
             w.element.style.zIndex = 10 + i;
@@ -98,16 +109,26 @@ const WindowManager = {
 
         maxBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (winDiv.style.width === '100%' && winDiv.style.height === '100%') {
-                winDiv.style.width = '480px';
-                winDiv.style.height = '320px';
-                winDiv.style.left = '60px';
-                winDiv.style.top = '40px';
+            const isMax = winDiv.dataset.maximized === 'true';
+            if (isMax) {
+                const r = winDiv._prevRect;
+                winDiv.style.width = r.w;
+                winDiv.style.height = r.h;
+                winDiv.style.left = r.l;
+                winDiv.style.top = r.t;
+                winDiv.dataset.maximized = 'false';
             } else {
+                winDiv._prevRect = {
+                    w: winDiv.style.width,
+                    h: winDiv.style.height,
+                    l: winDiv.style.left,
+                    t: winDiv.style.top,
+                };
                 winDiv.style.width = '100%';
                 winDiv.style.height = '100%';
                 winDiv.style.left = '0';
                 winDiv.style.top = '0';
+                winDiv.dataset.maximized = 'true';
             }
         });
     },
@@ -151,16 +172,16 @@ const WindowManager = {
     _bringToFront: function(id) {
         const win = this.windows.find(w => w.id === id);
         if (!win) return;
-        
+
         this.windows.forEach(w => w.isActive = false);
         win.isActive = true;
         this.activeWindowId = id;
-        
+
         this.windows.forEach((w, i) => {
             w.element.style.zIndex = 10 + i;
         });
         win.element.style.zIndex = 10 + this.windows.length;
-        
+
         TaskbarManager.update(this.windows);
     }
 };
