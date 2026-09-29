@@ -1,0 +1,320 @@
+/* ============================================================
+   ПРОВОДНИК — в стиле Windows 10
+   ============================================================ */
+
+.win-explorer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 13px;
+    overflow: hidden;
+}
+
+/* ----- Лента (пока упрощённая — панель команд) ----- */
+.win-explorer__ribbon {
+    background: #f5f6f7;
+    border-bottom: 1px solid #dcdcdc;
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    height: 36px;
+}
+
+.win-explorer__tab {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+}
+
+.win-explorer__tab:hover {
+    background: #e9eaeb;
+}
+
+.win-explorer__tab.active {
+    background: #fff;
+    border-bottom-color: #0078d7;
+    font-weight: 600;
+}
+
+/* ----- Адресная строка ----- */
+.win-explorer__address {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    flex-shrink: 0;
+}
+
+.win-explorer__nav-btn {
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.win-explorer__nav-btn:hover { background: #e6e6e6; }
+.win-explorer__nav-btn:disabled {
+    opacity: .35;
+    cursor: default;
+}
+.win-explorer__nav-btn:disabled:hover { background: transparent; }
+
+.win-explorer__breadcrumbs {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    min-height: 26px;
+    overflow: hidden;
+}
+
+.win-explorer__crumb {
+    padding: 2px 6px;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.win-explorer__crumb:hover { background: #e6f0fa; }
+
+.win-explorer__crumb-sep {
+    color: #999;
+    font-size: 10px;
+    padding: 0 2px;
+    user-select: none;
+}
+
+.win-explorer__search {
+    position: relative;
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.win-explorer__search input {
+    width: 100%;
+    padding: 5px 28px 5px 10px;
+    font-family: inherit;
+    font-size: 12px;
+    color: #1a1a1a;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    outline: none;
+    background: #fff;
+}
+
+.win-explorer__search input:focus {
+    border-color: #0078d7;
+}
+
+.win-explorer__search i {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* ----- Основная часть: слева дерево, справа файлы ----- */
+.win-explorer__body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Левая навигация */
+.win-explorer__sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: #f7f7f7;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+.win-explorer__tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.win-explorer__tree-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: 13px;
+    color: #1a1a1a;
+}
+
+.win-explorer__tree-item:hover {
+    background: #e9e9e9;
+}
+
+.win-explorer__tree-item.active {
+    background: #cfe4fa;
+}
+
+.win-explorer__tree-item i {
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.win-explorer__tree-item i.fa-folder       { color: #e8b73a; }
+.win-explorer__tree-item i.fa-desktop      { color: #6aa9f0; }
+.win-explorer__tree-item i.fa-hard-drive   { color: #999; }
+.win-explorer__tree-item i.fa-network-wired{ color: #3498db; }
+
+.win-explorer__tree-children {
+    list-style: none;
+    padding-left: 16px;
+    margin: 0;
+    display: none;
+}
+
+.win-explorer__tree-item.open + .win-explorer__tree-children {
+    display: block;
+}
+
+.win-explorer__tree-arrow {
+    font-size: 9px !important;
+    color: #888;
+    width: 10px !important;
+    transition: transform .15s;
+}
+
+.win-explorer__tree-item.open .win-explorer__tree-arrow {
+    transform: rotate(90deg);
+}
+
+/* Правая область с файлами */
+.win-explorer__content {
+    flex: 1;
+    overflow: auto;
+    padding: 8px 12px 12px;
+    background: #fff;
+}
+
+.win-explorer__content-header {
+    font-size: 13px;
+    color: #333;
+    margin: 8px 0 6px;
+    padding-bottom: 4px;
+    font-weight: 400;
+}
+
+/* Табличный вид */
+.win-files-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.win-files-table thead th {
+    text-align: left;
+    font-weight: 400;
+    color: #555;
+    padding: 6px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+}
+
+.win-files-table thead th:hover {
+    background: #f0f0f0;
+}
+
+.win-files-table tbody tr {
+    cursor: default;
+    user-select: none;
+}
+
+.win-files-table tbody tr:hover {
+    background: #e6f0fa;
+}
+
+.win-files-table tbody tr.selected {
+    background: #cfe4fa;
+}
+
+.win-files-table tbody td {
+    padding: 5px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+.win-files-table .col-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.win-files-table .col-name i {
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.win-files-table .col-name i.fa-folder     { color: #e8b73a; }
+.win-files-table .col-name i.fa-file-lines { color: #999; }
+
+/* Пустая папка */
+.win-explorer__empty {
+    text-align: center;
+    color: #888;
+    padding: 40px 0;
+    font-style: italic;
+}
+
+/* Строка состояния */
+.win-explorer__statusbar {
+    height: 22px;
+    background: #f5f6f7;
+    border-top: 1px solid #dcdcdc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 12px;
+    color: #555;
+    flex-shrink: 0;
+}

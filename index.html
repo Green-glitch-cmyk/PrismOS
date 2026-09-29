@@ -14,6 +14,21 @@
     <meta name="license" content="MIT License">
 </head>
 <body>
+    <div id="boot-screen">
+        <div class="boot-inner">
+            <div class="boot-logo">
+                <i class="fas fa-cube"></i>
+            </div>
+            <div class="boot-title">PrismOS</div>
+            <div class="boot-version">Alpha 2</div>
+
+            <div class="boot-progress">
+                <div class="boot-progress-bar" id="boot-progress-bar"></div>
+            </div>
+
+            <div class="boot-status" id="boot-status">Загрузка…</div>
+        </div>
+    </div>
     <div id="desktop">
         <div id="workspace">
             <!-- Иконки рабочего стола -->
@@ -34,24 +49,65 @@
             
             <!-- Бета-текст в правом нижнем углу -->
             <p id="beta-text">
-                PrismOS Alpha1<br>
-                Сборка a1-2809<br>
+                PrismOS Alpha 2<br>
+                Сборка a2-2909<br>
             </p>
         </div>
         <div id="taskbar">
-            <div id="start-button" title="PrismOS"><i class="fas fa-window-maximize"></i></div>
-            <div class="dock-divider"></div>
+            <!-- Слева: Пуск, Поиск, Корзина (закреплённые) -->
+            <div class="tb-pinned">
+                <button class="tb-btn tb-start" id="start-button" title="Пуск">
+                    ⬜ 
+                </button>
+                <button class="tb-btn tb-search" id="tb-search" title="Поиск">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="tb-btn" id="tb-taskview" title="Представление задач">
+                    <i class="fas fa-table-columns"></i>
+                </button>
+                <button class="tb-btn" id="tb-explorer" title="Проводник">
+                    <i class="fas fa-folder"></i>
+                </button>
+            </div>
+
+            <!-- Открытые приложения -->
             <div class="taskbar-apps" id="taskbarApps"></div>
-            <div id="clock"><i class="far fa-clock"></i> 00:00</div>
+
+            <!-- Справа: трей -->
+            <div class="tb-tray">
+                <button class="tb-tray-icon" id="tb-network" title="Сеть">
+                    <i class="fas fa-wifi"></i>
+                </button>
+                <button class="tb-tray-icon" id="tb-volume" title="Звук">
+                    <i class="fas fa-volume-high"></i>
+                </button>
+                <button class="tb-tray-lang" id="tb-lang" title="Раскладка">
+                    РУС
+                </button>
+                <button class="tb-tray-clock" id="clock" title="Дата и время">
+                    <span id="tb-clock-time">00:00</span>
+                    <span id="tb-clock-date">01.01.2026</span>
+                </button>
+                <button class="tb-tray-icon" id="tb-notify" title="Уведомления">
+                    <i class="fas fa-comment"></i>
+                </button>
+            </div>
         </div>
     </div>
 
+    <div id="toast-container"></div>
+    <div id="modal-backdrop"></div>
+
     <script src="js/utils/helpers.js"></script>
     <script src="js/utils/clock.js"></script>
+    <script src="js/core/sounds.js"></script>        <!-- ← новый -->
+    <script src="js/core/ui.js"></script>             <!-- ← новый -->
+    <script src="js/core/boot.js"></script>
     <script src="js/core/contextMenu.js"></script>
-    <script src="js/core/windowManager.js"></script>
     <script src="js/core/taskbarManager.js"></script>
+    <script src="js/core/windowManager.js"></script>
     <script src="js/core/desktopManager.js"></script>
+    <script src="js/core/fileSystem.js"></script>
     <script src="js/apps/explorer.js"></script>
     <script src="js/apps/notepad.js"></script>
     <script src="js/apps/settings.js"></script>

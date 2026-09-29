@@ -3,23 +3,94 @@ const AboutApp = {
     title: 'О системе',
 
     getContent: function() {
+        const username = localStorage.getItem('prismos.username') || 'Пользователь';
+        const build = 'a2-2909';
+        const version = 'Alpha 2';
+
         return `
-            <div style="padding: 8px 0;">
-                <div style="text-align:center; padding:24px 0; border-bottom:2px solid #ddd;">
-                    <i class="fas fa-cube" style="font-size:64px; color:#f1c40f; margin-bottom:12px; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));"></i>
-                    <h2 style="font-weight:300; letter-spacing:2px; font-size:32px;">PrismOS</h2>
-                    <p style="color:#666; font-size:14px;">Alpha 1 · 2026</p>
+            <div style="
+                padding: 4px 0;
+                font-size: 13px;
+                color: #1a1a1a;
+                background: #fff;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            ">
+                <!-- Логотип и название -->
+                <div style="display:flex; align-items:center; gap:16px; margin: 8px 0 16px;">
+                    <i class="fas fa-cube" style="
+                        font-size: 56px;
+                        color: #0078d7;
+                        line-height: 1;
+                    "></i>
+                    <div>
+                        <div style="font-size: 32px; font-weight: 300; color: #0078d7; line-height: 1;">
+                            PrismOS
+                        </div>
+                        <div style="font-size: 16px; color: #0078d7; margin-top: 4px;">
+                            ${version}
+                        </div>
+                    </div>
                 </div>
-                <div class="metro-panel" style="margin-top:12px;">
-                    <h3><i class="fas fa-list" style="color:#9b59b6;"></i> Что нового в Alpha 1</h3>
-                    <ul class="metro-list">
-                        <li><i class="fas fa-cube" style="width:28px; color:#f1c40f;"></i> 3D-эффекты интерфейса</li>
-                        <li><i class="fas fa-terminal" style="width:28px; color:#2ecc71;"></i> Терминал</li>
-                        <li><i class="fas fa-calculator" style="width:28px; color:#3498db;"></i> Калькулятор</li>
-                        <li><i class="fas fa-note-sticky" style="width:28px; color:#e74c3c;"></i> Блокнот с сохранением</li>
-                    </ul>
+
+                <!-- Разделитель -->
+                <hr style="border: none; border-top: 1px solid #d0d0d0; margin: 0 0 14px;">
+
+                <!-- Текстовые блоки -->
+                <div style="line-height: 1.55; font-size: 12.5px;">
+                    <p style="margin-bottom: 8px;">
+                        PrismOS ${version} (сборка ${build})
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        © 2026 PrismOS Team. Все права защищены.
+                    </p>
+                    <p style="margin-bottom: 16px;">
+                        Операционная система PrismOS и пользовательский интерфейс
+                        защищены авторским правом и распространяются под лицензией MIT.
+                    </p>
+                    <p style="margin-bottom: 6px;">
+                        Продукт лицензирован в соотв. с
+                        <a href="#" style="color:#0078d7; text-decoration:none;"
+                           onclick="UI.alert('Полный текст лицензии — в файле LICENSE в репозитории.', {title:'Условия использования'}); return false;">
+                            усл. лиц. соглашения на исп. ПО PrismOS
+                        </a>,
+                        выданного:
+                    </p>
+                    <p style="margin-left: 20px; margin-bottom: 4px;">
+                        <strong>${username}</strong>
+                    </p>
+                </div>
+
+                <!-- Кнопка OK -->
+                <div style="margin-top: auto; display: flex; justify-content: flex-end; padding-top: 12px;">
+                    <button class="btn-metro" id="about-ok" style="
+                        padding: 5px 28px;
+                        font-size: 13px;
+                        min-width: 84px;
+                    ">
+                        ОК
+                    </button>
                 </div>
             </div>
         `;
+    },
+
+    init: function(winElement) {
+        const winDiv = winElement.closest('.window');
+        if (winDiv) {
+            winDiv.style.width  = '440px';
+            winDiv.style.height = '380px';
+            // Запрещаем resize — winver не растягивается
+            winDiv.style.resize = 'none';
+        }
+
+        const ok = winElement.querySelector('#about-ok');
+        if (ok) {
+            ok.addEventListener('click', () => {
+                const id = winDiv.dataset.windowId;
+                if (id) WindowManager.close(id);
+            });
+        }
     }
 };

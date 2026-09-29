@@ -1,0 +1,191 @@
+/* ============================================================
+   UI: тосты и модалки (замена alert/confirm/prompt)
+   ============================================================ */
+
+/* ----- Тосты ----- */
+#toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 260px;
+    max-width: 360px;
+    background: linear-gradient(180deg, #2a2a30 0%, #1c1c20 100%);
+    border: 2px solid #0a0a0a;
+    border-left: 4px solid #f1c40f;
+    border-radius: 8px;
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.6),
+        0 1px 0 rgba(255,255,255,0.06) inset;
+    padding: 12px 16px;
+    color: #eee;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: auto;
+    animation: toastIn .25s ease-out;
+    transition: opacity .25s, transform .25s;
+}
+
+.toast.out {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.toast-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.toast-info    { border-left-color: #3498db; }
+.toast-success { border-left-color: #2ecc71; }
+.toast-warning { border-left-color: #f39c12; }
+.toast-error   { border-left-color: #e74c3c; }
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ----- Модалки ----- */
+#modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    padding: 20px;
+}
+
+#modal-backdrop.show {
+    display: flex;
+}
+
+.modal {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, #2a2a30 0%, #1c1c20 100%);
+    border: 2px solid #0a0a0a;
+    border-radius: 12px;
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.7),
+        0 1px 0 rgba(255,255,255,0.06) inset;
+    color: #eee;
+    overflow: hidden;
+    animation: modalIn .22s ease-out;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);   }
+}
+
+.modal-header {
+    padding: 16px 20px 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-header .modal-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+.modal-body {
+    padding: 4px 20px 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ccc;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+
+.modal-input {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #141418;
+    color: #fff;
+    border: 2px solid #444;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.modal-input:focus {
+    border-color: #f1c40f;
+    box-shadow: 0 0 0 3px rgba(241,196,15,0.15);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid #333;
+    background: rgba(0,0,0,0.15);
+}
+
+.modal-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border: 2px solid #444;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2b2b2b 100%);
+    color: #eee;
+    cursor: pointer;
+    transition: transform .1s ease, background .15s ease, border-color .15s ease;
+}
+
+.modal-btn:hover {
+    background: linear-gradient(180deg, #454545 0%, #353535 100%);
+    border-color: #666;
+}
+
+.modal-btn:active {
+    transform: translateY(1px);
+}
+
+.modal-btn.primary {
+    background: linear-gradient(180deg, #f1c40f 0%, #d4a90a 100%);
+    border-color: #b88f08;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.modal-btn.primary:hover {
+    background: linear-gradient(180deg, #f4cf33 0%, #dfb41a 100%);
+    border-color: #c99a0a;
+}
+
+.modal-btn.danger {
+    background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+    border-color: #a03123;
+    color: #fff;
+}
+
+.modal-btn.danger:hover {
+    background: linear-gradient(180deg, #ec6151 0%, #c9473a 100%);
+}

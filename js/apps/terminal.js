@@ -17,7 +17,7 @@ const TerminalApp = {
     },
 
     _commands: {
-        help:   () => 'Доступно: help, ls, open <app>, clear, echo <text>, about',
+        help:   () => 'Доступно: help, ls, open <app>, clear, echo <text>, about, error <text>, notify <text>',
         ls:     () => Object.keys(AppLauncher.apps).join('  '),
         open:   (args) => {
             const appId = args[0];
@@ -28,6 +28,18 @@ const TerminalApp = {
         clear:  () => { document.getElementById('terminal-output').innerHTML = ''; return ''; },
         echo:   (args) => args.join(' '),
         about:  () => 'PrismOS Alpha 1 · MIT License · 2026',
+
+        // === Новые команды ===
+        error:  (args) => {
+            const text = args.join(' ') || 'Неизвестная ошибка';
+            UI.error(text);
+            return `[error] ${text}`;
+        },
+        notify: (args) => {
+            const text = args.join(' ') || 'Уведомление';
+            UI.notify(text, { type: 'info' });
+            return `[notify] ${text}`;
+        },
     },
 
     init: function(winElement) {

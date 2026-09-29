@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const welcomeContent = `
             <div style="padding: 4px 0;">
-                <h2 style="font-weight:300; font-size:26px;">👋 Добро пожаловать в Alpha 1</h2>
+                <h2 style="font-weight:300; font-size:26px;">Добро пожаловать в Alpha 2</h2>
                 <p style="font-size:16px; margin: 12px 0; border-left: 6px solid #f1c40f; padding-left: 16px;">
                     PrismOS — веб-система с Metro-интерфейсом и лёгким 3D.
                 </p>

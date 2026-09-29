@@ -1,7 +1,11 @@
+@import url('boot.css');
 @import url('desktop.css');
 @import url('windows.css');
 @import url('taskbar.css');
 @import url('components.css');
+@import url('ui.css');
+@import url('settings.css');
+@import url('explorer.css');
 
 :root {
     --shadow-soft: 0 2px 6px rgba(0,0,0,0.35);
@@ -14,7 +18,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 body {

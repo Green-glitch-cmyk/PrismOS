@@ -1,0 +1,101 @@
+/* ============================================================
+   ЗАГРУЗОЧНЫЙ ЭКРАН
+   ============================================================ */
+#boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 40%, #2a2a30 0%, #141418 70%, #0a0a0c 100%);
+    transition: opacity .6s ease, visibility .6s ease;
+    overflow: hidden;
+}
+
+#boot-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(241,196,15,0.08), transparent 60%);
+    pointer-events: none;
+}
+
+#boot-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boot-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: bootFadeIn .8s ease-out;
+}
+
+@keyframes bootFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.boot-logo {
+    font-size: 72px;
+    color: #f1c40f;
+    line-height: 1;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 8px 24px rgba(241,196,15,0.35));
+    animation: bootPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes bootPulse {
+    0%, 100% { transform: scale(1);    opacity: 1;    }
+    50%      { transform: scale(1.06); opacity: 0.85; }
+}
+
+.boot-title {
+    font-size: 34px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.boot-version {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #888;
+    margin-top: 6px;
+    margin-bottom: 36px;
+    text-transform: uppercase;
+}
+
+.boot-progress {
+    width: 280px;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+.boot-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f1c40f 0%, #f39c12 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(241,196,15,0.6);
+    transition: width .3s ease;
+}
+
+.boot-status {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #999;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    min-height: 18px;
+}
